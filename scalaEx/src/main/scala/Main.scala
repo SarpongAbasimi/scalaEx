@@ -1,4 +1,4 @@
-import traits.{Circle, Rectangle, Shapes, Square}
+import traits.{Circle, Rectangle, Shapes, Square, Tigers}
 
 
 object Draw {
@@ -13,8 +13,8 @@ object Draw {
 
 object Main {
   def main(args: Array[String]): Unit = {
-    val shape = Circle(2)
+    val tiger=  Tigers("blue")
 
-    Draw(shape)
+    println(tiger.dinner)
   }
 }
