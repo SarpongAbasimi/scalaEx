@@ -1,4 +1,6 @@
-import traits.{Circle, Rectangle, Shapes, Square, Tigers}
+import traits.{Circle, Empty, IntList, Pair, Rectangle, Red, Shapes, Square, Tigers}
+
+import scala.annotation.tailrec
 
 
 object Draw {
@@ -11,10 +13,19 @@ object Draw {
   }
 }
 
+object Calc {
+  @tailrec
+  def sum(list: IntList, accumulator: Int = 0): Int = list match {
+    case Empty => accumulator
+    case Pair(head, tail) => sum(tail, head + accumulator)
+  }
+}
+
 object Main {
   def main(args: Array[String]): Unit = {
-    val tiger=  Tigers("blue")
+    val list = Pair(1, Pair(3, Empty))
+    val result = Calc.sum(list)
 
-    println(tiger.dinner)
+    println(result)
   }
 }
