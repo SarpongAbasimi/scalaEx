@@ -1,4 +1,5 @@
-import traits.{Circle, Empty, IntList, Pair, Rectangle, Red, Shapes, Square, Tigers}
+import model.Person
+import traits.{Circle, Empty, HtmlWriter, IntList, Pair, Rectangle, Red, Shapes, Square, Tigers}
 
 import scala.annotation.tailrec
 
@@ -31,11 +32,36 @@ object Calc {
   }
 }
 
+object Writer {
+    val htmlWriter = new HtmlWriter[Person] {
+      def toHtml(value: Person): String = {
+        s"The person is ${value.name} and age is ${value.age}"
+      }
+    }
+}
+
+object PersonWriter extends HtmlWriter[Person]{
+  override def toHtml(value: Person): String = s"This is ${value.name} typeClass"
+}
+
+object MyImp {
+  implicit class IntEnrichment(value: Int) {
+    def yeah(): Unit = {
+      for(_ <- 0 until value){
+        println(s"Oh yeah")
+      }
+    }
+  }
+}
+
+import MyImp._
+
 object Main {
   def main(args: Array[String]): Unit = {
-    val list = Pair(1, Pair(3, Empty))
-    val result = Calc.len(list)
+    val person = Person("Ben", 1)
+    val objectWriter: String = Writer.htmlWriter.toHtml(person)
 
-    println(result)
+    5.yeah()
+
   }
 }
