@@ -19,12 +19,22 @@ object Calc {
     case Empty => accumulator
     case Pair(head, tail) => sum(tail, head + accumulator)
   }
+
+  def len(list: IntList, size: Int = 0): Int = {
+    list match {
+      case Empty => size
+      case Pair(_, tail) => {
+        println(tail)
+        len(tail, size + 1)
+      }
+    }
+  }
 }
 
 object Main {
   def main(args: Array[String]): Unit = {
     val list = Pair(1, Pair(3, Empty))
-    val result = Calc.sum(list)
+    val result = Calc.len(list)
 
     println(result)
   }
