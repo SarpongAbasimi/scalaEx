@@ -4,5 +4,8 @@ ThisBuild / scalaVersion := "2.13.12"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "scalaEx"
+    name := "scalaEx",
+    libraryDependencies ++= Seq(
+      "org.apache.kafka" %% "kafka-streams-scala" % "3.6.1"
+    )
   )
