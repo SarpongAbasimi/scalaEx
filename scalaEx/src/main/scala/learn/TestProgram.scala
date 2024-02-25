@@ -1,5 +1,7 @@
+package learn
+
 import model.Person
-import traits.{Circle, Empty, HtmlWriter, IntList, Pair, Rectangle,  Shapes, Square}
+import traits._
 
 import scala.annotation.tailrec
 
