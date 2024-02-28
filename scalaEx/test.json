@@ -1,0 +1,9 @@
+{ "id" : 1,"title" : "tre metri sopra in cielo", "lang" : "ita", "goodRating" : true, "randomData" : ""}
+
+{"id" : 2, "title" : "I promessi sposi", "lang" : "ita", "goodRating" : false, "randomData" : ""}
+
+{ "id" : 3, "title" : "Home Going", "lang" : "eng", "goodRating" : true, "randomData" : ""}
+
+{"id" : 4, "title" : "Ghana b3 y3 yie anaa", "lang" : "twi", "goodRating" : true, "randomData" : ""}
+
+{"id" : 5, "title" : "Not good book", "lang" : "german", "goodRating" : false, "randomData" : ""}
