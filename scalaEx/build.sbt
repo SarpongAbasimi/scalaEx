@@ -15,5 +15,6 @@ lazy val root = (project in file("."))
     name := "scalaEx",
     libraryDependencies ++= Seq(
       "org.apache.kafka" %% "kafka-streams-scala" % "3.6.1",
+      "ch.qos.logback" % "logback-classic" % "1.5.1"
     ) ++ cicre
   )

@@ -1,7 +1,7 @@
 package kstreams.topology
 
 
-import kstreams.serdes.{CustomSerdes, GenericSerde}
+import kstreams.serdes.GenericSerde
 import model.Books
 import org.apache.kafka.streams.Topology
 import org.apache.kafka.streams.scala.StreamsBuilder
@@ -13,12 +13,11 @@ object BookTopology {
 
   def build(customSerde: GenericSerde): Topology =  {
     val builder: StreamsBuilder = new StreamsBuilder()
-     val stream = builder.stream[Array[Byte], Books]("users")(Consumed.`with`(Serdes.byteArraySerde, new CustomSerdes()
+     val stream = builder.stream[Array[Byte], Books]("users")(Consumed.`with`(Serdes.byteArraySerde, customSerde
        .create[Books]))
 
 
     val filteredStream = stream.filterNot((_, books) => books.goodRating == false)
-      .peek((_,b) => println(s"Data running through the stream is $b"))
 
     val branches: Array[KStream[Array[Byte], Books]] = filteredStream
       .branch(
@@ -27,7 +26,9 @@ object BookTopology {
 
 
     val twiBranch: KStream[Array[Byte], Books] = branches(0)
-    val otherBranch: KStream[Array[Byte], Books] = branches(1)
+    val otherBranch: KStream[Array[Byte], Books] = branches(1).flatMapValues(books => {
+     Seq(books.copy(lang = s"La lingua é ${books.lang}"))
+    }).peek((_, book) => println(s"Books from the flatMap are ${book.title}"))
 
 
     val mergedStream: KStream[Array[Byte], Books] = twiBranch.merge(otherBranch).mapValues(input => {
@@ -41,5 +42,3 @@ object BookTopology {
     builder.build()
   }
 }
-
-
