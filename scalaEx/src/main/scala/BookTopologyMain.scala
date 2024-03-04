@@ -5,7 +5,7 @@ import java.util.Properties
 
 
 
-object Main {
+object BookTopologyMain {
   def main(args: Array[String]): Unit = {
 
     val customSerde = new CustomSerdes()
