@@ -22,5 +22,3 @@ class CustomSerdes extends GenericSerde {
     )
   }
 }
-
-
