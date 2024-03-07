@@ -20,7 +20,7 @@ class UserPostTopology(customSerdes: GenericSerde) {
     val post: KStream[Int, Post] = builder.stream[Int, Post]("post")(Consumed.`with`[Int, Post](
         Serdes.intSerde, customSerdes.create[Post]))
       .selectKey((_, post) => post.userId)
-      .peek((_,b) => println(s"$b"))
+      .peek((k,v) => println(s"Key is $k and value is $v"))
 
     val joinedParams: Joined[Int, Post, Users] = Joined
       .`with`[Int, Post, Users](

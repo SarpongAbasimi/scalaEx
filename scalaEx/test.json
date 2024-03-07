@@ -1,9 +1,17 @@
-{ "id" : 1,"title" : "tre metri sopra in cielo", "lang" : "ita", "goodRating" : true, "randomData" : ""}
+Post
+{ "id" : 1, "title" : "delectus aut", "body" : "quia et", "userId" : 1}
+{ "id" : 2, "title" : "delectus", "body" : "et", "userId" : 2}
+{ "id" : 3, "title" : "del", "body" : "etas", "userId" : 3}
 
-{"id" : 2, "title" : "I promessi sposi", "lang" : "ita", "goodRating" : false, "randomData" : ""}
+Users
+{"id" : 1, "name" : "sarp", "email" : "sarp@demo.com"}
+{"id" : 2, "name" : "Ben", "email" : "ben@demo.com"}
+{"id" : 3, "name" : "Tom", "email" : "tom@demo.com"}
+{"id" : 4, "name" : "bom", "email" : "bom@demo.com"}
 
-{ "id" : 3, "title" : "Home Going", "lang" : "eng", "goodRating" : true, "randomData" : ""}
 
-{"id" : 4, "title" : "Ghana b3 y3 yie anaa", "lang" : "twi", "goodRating" : true, "randomData" : ""}
+docker exec -it 5ceb03133388 kafka-topics --create --bootstrap-server localhost:9092 --topic users --create --partitions 2 --replication-factor 1
+docker exec -it 5ceb03133388 kafka-topics --create --bootstrap-server localhost:9092 --topic post --create --partitions 2 --replication-factor 1
 
-{"id" : 5, "title" : "Not good book", "lang" : "german", "goodRating" : false, "randomData" : ""}
+docker exec -it 5ceb03133388 kafka-console-producer --bootstrap-server localhost:9092 --topic users
+docker exec -it 5ceb03133388 kafka-console-producer --bootstrap-server localhost:9092 --topic post
