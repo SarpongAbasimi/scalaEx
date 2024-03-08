@@ -14,17 +14,17 @@ class UserPostTopology(customSerdes: GenericSerde) {
 
     val builder = new StreamsBuilder()
 
-  val users: KTable[Int, Users] = builder.table[Int, Users]("users")(Consumed.`with`[Int, Users](
-    Serdes.intSerde, customSerdes.create[Users]))
+  val users: KTable[String, Users] = builder.table[String, Users]("users")(Consumed.`with`[String, Users](
+    Serdes.stringSerde, customSerdes.create[Users]))
 
-    val post: KStream[Int, Post] = builder.stream[Int, Post]("post")(Consumed.`with`[Int, Post](
-        Serdes.intSerde, customSerdes.create[Post]))
-      .selectKey((_, post) => post.userId)
+    val post: KStream[String, Post] = builder.stream[String, Post]("post")(Consumed.`with`[String, Post](
+        Serdes.stringSerde, customSerdes.create[Post]))
+      .selectKey((_, post) => post.userId.toString)
       .peek((k,v) => println(s"Key is $k and value is $v"))
 
-    val joinedParams: Joined[Int, Post, Users] = Joined
-      .`with`[Int, Post, Users](
-        Serdes.intSerde,
+    val joinedParams: Joined[String, Post, Users] = Joined
+      .`with`[String, Post, Users](
+        Serdes.stringSerde,
         customSerdes.create[Post],
         customSerdes.create[Users]
       )

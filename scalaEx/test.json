@@ -1,17 +1,20 @@
 Post
 { "id" : 1, "title" : "delectus aut", "body" : "quia et", "userId" : 1}
-{ "id" : 2, "title" : "delectus", "body" : "et", "userId" : 2}
-{ "id" : 3, "title" : "del", "body" : "etas", "userId" : 3}
+//{ "id" : 2, "title" : "delectus", "body" : "et", "userId" : 1}
+//{ "id" : 3, "title" : "Yes we can obama", "body" : "etas", "userId" : 3}
+//{ "id" : 4, "title" : "What is this book called", "body" : "etas", "userId" : 2}
+//{ "id" : 5, "title" : "The book of the lands", "body" : "etas", "userId" : 4}
+//{ "id" : 6, "title" : "The house of fame", "body" : "etas", "userId" : 3}
 
 Users
-{"id" : 1, "name" : "sarp", "email" : "sarp@demo.com"}
-{"id" : 2, "name" : "Ben", "email" : "ben@demo.com"}
-{"id" : 3, "name" : "Tom", "email" : "tom@demo.com"}
-{"id" : 4, "name" : "bom", "email" : "bom@demo.com"}
+"1":{"id" : 1, "name" : "sarp", "email" : "sarp@demo.com"}
+//"2":{"id" : 2, "name" : "Ben", "email" : "ben@demo.com"}
+//"3":{"id" : 3, "name" : "Tom", "email" : "tom@demo.com"}
+//"4":{"id" : 4, "name" : "bom", "email" : "bom@demo.com"}
 
 
-docker exec -it 5ceb03133388 kafka-topics --create --bootstrap-server localhost:9092 --topic users --create --partitions 2 --replication-factor 1
-docker exec -it 5ceb03133388 kafka-topics --create --bootstrap-server localhost:9092 --topic post --create --partitions 2 --replication-factor 1
+docker exec -it be47fb681b96 kafka-topics --create --bootstrap-server localhost:9092 --topic users --create --partitions 2 --replication-factor 1
+docker exec -it be47fb681b96 kafka-topics --create --bootstrap-server localhost:9092 --topic post --create --partitions 2 --replication-factor 1
 
-docker exec -it 5ceb03133388 kafka-console-producer --bootstrap-server localhost:9092 --topic users
-docker exec -it 5ceb03133388 kafka-console-producer --bootstrap-server localhost:9092 --topic post
+docker exec -it be47fb681b96 kafka-console-producer --bootstrap-server localhost:9092 --topic users --property parse.key=true --property key.separator=:
+docker exec -it be47fb681b96 kafka-console-producer --bootstrap-server localhost:9092 --topic post
