@@ -3,9 +3,9 @@ package kstreams.topology
 import kstreams.serdes.GenericSerde
 import model.{Post, Users, UsersPost}
 import org.apache.kafka.streams.Topology
-import org.apache.kafka.streams.scala.kstream.Joined
+import org.apache.kafka.streams.kstream.Materialized
+import org.apache.kafka.streams.scala.kstream.{Consumed, Grouped, Joined, KGroupedStream, KStream, KTable}
 import org.apache.kafka.streams.scala.StreamsBuilder
-import org.apache.kafka.streams.scala.kstream.{Consumed, KStream, KTable}
 import org.apache.kafka.streams.scala.serialization.Serdes
 
 class UserPostTopology(customSerdes: GenericSerde) {
@@ -30,9 +30,13 @@ class UserPostTopology(customSerdes: GenericSerde) {
 
     val userPostJoiner: (Post, Users) => UsersPost = (p, u) => UsersPost(u.id, u.name, u.email, p.title, p.id)
 
-      post.join[Users, UsersPost](users)(userPostJoiner)(joinedParams).peek((_, v) => {
-        println(s"The joined stream is $v")
-      })
+    val joinedStream: KStream[String, UsersPost] = post.join[Users, UsersPost](users)(userPostJoiner)(joinedParams)
+
+    val groupedStream: KGroupedStream[String, UsersPost] = joinedStream
+      .groupByKey(Grouped.`with`[String, UsersPost]
+        (Serdes.stringSerde, customSerdes.create[UsersPost]))
+
+    val count: KTable[String, Long] = groupedStream.count()(Materialized.`with`(Serdes.stringSerde, Serdes.longSerde))
 
     builder.build()
   }
