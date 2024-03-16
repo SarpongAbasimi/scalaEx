@@ -1,6 +1,5 @@
 import kstreams.serdes.{CustomSerdes, GenericSerde}
 import kstreams.topology.UserPostTopology
-import model.UserPostWithCount
 import org.apache.kafka.streams.state.{HostInfo, QueryableStoreTypes, ReadOnlyKeyValueStore}
 import org.apache.kafka.streams.{KafkaStreams, StoreQueryParameters, Topology}
 import service.UserPostService
@@ -15,14 +14,6 @@ object UserPostMain {
     val host: String = "localhost"
     val port: Int = 8080
     val hostInfo: HostInfo = new HostInfo(host, port)
-
-//    val stateStore: ReadOnlyKeyValueStore[String, UserPostWithCount] = kafkaStreams.store(
-//      StoreQueryParameters.fromNameAndType(
-//        "learning",
-//        QueryableStoreTypes.keyValueStore[String,  UserPostWithCount]()
-//      ))
-//
-
 
 
     kafkaStreams.start()
