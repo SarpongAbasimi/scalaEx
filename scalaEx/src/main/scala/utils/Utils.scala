@@ -10,6 +10,7 @@ object Utils {
     val properties: Properties = new Properties()
     properties.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
     properties.put(StreamsConfig.APPLICATION_ID_CONFIG, appName)
+    properties.put(StreamsConfig.APPLICATION_SERVER_CONFIG, "myapp:8080")
     properties
   }
 }

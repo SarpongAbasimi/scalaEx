@@ -18,11 +18,13 @@ class UserPostService(host: HostInfo, kafkaStreams: KafkaStreams) {
 
 
   def start(): Unit = {
-    val app = Javalin.create().start(host.port())
-    app.get("/app/:key", getKey)
+    val app: Javalin = Javalin.create().start(host.port())
+    app.get("/app/{key}", context => {
+      getKey(context)
+    })
   }
 
-  def getKey(context: Context): Context = {
+  def getKey(context: Context): Unit = {
     val productId = context.pathParam("key")
 
    val result: UserPostWithCount = getStateStore.get(productId)
