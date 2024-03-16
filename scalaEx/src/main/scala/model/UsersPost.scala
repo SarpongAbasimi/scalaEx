@@ -8,7 +8,9 @@ final case class UsersPost(
                             name: String,
                             email: String,
                             title: String,
-                            postId: Int)
+                            postId: Int,
+                            count: Int = 0
+                          )
 
 object UsersPost {
   implicit val encoder: Encoder[UsersPost] = deriveEncoder[UsersPost]

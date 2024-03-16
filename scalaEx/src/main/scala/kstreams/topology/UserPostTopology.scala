@@ -1,11 +1,11 @@
 package kstreams.topology
 
 import kstreams.serdes.GenericSerde
-import model.{Post, Users, UsersPost}
+import model.{Post, UserPostWithCount, Users, UsersPost}
 import org.apache.kafka.streams.Topology
-import org.apache.kafka.streams.kstream.Materialized
+import org.apache.kafka.streams.scala.kstream.Materialized
 import org.apache.kafka.streams.scala.kstream.{Consumed, Grouped, Joined, KGroupedStream, KStream, KTable}
-import org.apache.kafka.streams.scala.StreamsBuilder
+import org.apache.kafka.streams.scala.{ByteArrayKeyValueStore, StreamsBuilder}
 import org.apache.kafka.streams.scala.serialization.Serdes
 
 class UserPostTopology(customSerdes: GenericSerde) {
@@ -36,7 +36,19 @@ class UserPostTopology(customSerdes: GenericSerde) {
       .groupByKey(Grouped.`with`[String, UsersPost]
         (Serdes.stringSerde, customSerdes.create[UsersPost]))
 
-    val count: KTable[String, Long] = groupedStream.count()(Materialized.`with`(Serdes.stringSerde, Serdes.longSerde))
+//    val count: KTable[String, Long] = groupedStream.count()(Materialized.`with`(Serdes.stringSerde, Serdes.longSerde))
+
+    val aggregator : (String, UsersPost, UserPostWithCount) => UserPostWithCount = (_, usersPost, userPostWithCount) => {
+      userPostWithCount.create(usersPost)
+    }
+
+    groupedStream
+      .aggregate[UserPostWithCount](UserPostWithCount())(aggregator)(
+        Materialized.as[String, UserPostWithCount, ByteArrayKeyValueStore]("learning")(
+          Serdes.stringSerde, customSerdes.create[UserPostWithCount]
+        )
+      )
+
 
     builder.build()
   }
