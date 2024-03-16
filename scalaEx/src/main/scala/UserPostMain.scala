@@ -10,7 +10,7 @@ object UserPostMain {
 
     val customSerdes: GenericSerde = new CustomSerdes()
     val topology: Topology = new UserPostTopology(customSerdes).build
-    val kafkaStreams = new KafkaStreams(topology, Utils.createProperties("learn_join"))
+    val kafkaStreams: KafkaStreams = new KafkaStreams(topology, Utils.createProperties("learn_join"))
 
 
     val stateStore: ReadOnlyKeyValueStore[String, UserPostWithCount] = kafkaStreams.store(
