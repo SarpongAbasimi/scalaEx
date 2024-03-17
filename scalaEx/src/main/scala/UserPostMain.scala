@@ -1,7 +1,7 @@
 import kstreams.serdes.{CustomSerdes, GenericSerde}
 import kstreams.topology.UserPostTopology
-import org.apache.kafka.streams.state.{HostInfo, QueryableStoreTypes, ReadOnlyKeyValueStore}
-import org.apache.kafka.streams.{KafkaStreams, StoreQueryParameters, Topology}
+import org.apache.kafka.streams.state.HostInfo
+import org.apache.kafka.streams.{KafkaStreams, Topology}
 import service.UserPostService
 import utils.Utils
 

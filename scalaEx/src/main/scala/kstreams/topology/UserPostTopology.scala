@@ -36,7 +36,6 @@ class UserPostTopology(customSerdes: GenericSerde) {
       .groupByKey(Grouped.`with`[String, UsersPost]
         (Serdes.stringSerde, customSerdes.create[UsersPost]))
 
-//    val count: KTable[String, Long] = groupedStream.count()(Materialized.`with`(Serdes.stringSerde, Serdes.longSerde))
 
     val aggregator : (String, UsersPost, UserPostWithCount) => UserPostWithCount = (_, usersPost, userPostWithCount) => {
       userPostWithCount.create(usersPost)
