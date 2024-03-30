@@ -18,3 +18,10 @@ docker exec -it 1c01e14f0936 kafka-topics --create --bootstrap-server localhost:
 
 docker exec -it 1c01e14f0936 kafka-console-producer --bootstrap-server localhost:9092 --topic users --property parse.key=true --property key.separator=:
 docker exec -it 1c01e14f0936 kafka-console-producer --bootstrap-server localhost:9092 --topic post
+
+
+bodyTemperatue
+{ "timeStamp" : "2024-03-30T20:43:54.434138273Z", "temperature" : 101.0, "unit" : "F"}
+
+timestamp
+{"timeStamp" : "2024-03-30T20:46:56.778417716Z"}
