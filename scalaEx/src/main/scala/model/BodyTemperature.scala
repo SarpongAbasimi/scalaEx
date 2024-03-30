@@ -5,7 +5,7 @@ import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 
 import java.time.Instant
 
-final case class BodyTemperature(timeStamp: Instant, temperature: Double, unit: String)
+final case class BodyTemperature(timestamp: Instant, temperature: Double, unit: String)
 
 object BodyTemperature {
   implicit val encoder: Encoder[BodyTemperature] = deriveEncoder[BodyTemperature]
