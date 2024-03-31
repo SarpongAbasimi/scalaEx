@@ -13,15 +13,17 @@ Users
 4:{"id" : 4, "name" : "bom", "email" : "bom@demo.com"}
 
 
-docker exec -it 1c01e14f0936 kafka-topics --create --bootstrap-server localhost:9092 --topic users --create --partitions 2 --replication-factor 1
-docker exec -it 1c01e14f0936 kafka-topics --create --bootstrap-server localhost:9092 --topic post --create --partitions 2 --replication-factor 1
+docker exec -it 30eb66da2f4e kafka-topics --create --bootstrap-server localhost:9092 --topic pulse-event --create --partitions 2 --replication-factor 1
+docker exec -it 30eb66da2f4e kafka-topics --create --bootstrap-server localhost:9092 --topic body-temp-event --create --partitions 2 --replication-factor 1
 
-docker exec -it 1c01e14f0936 kafka-console-producer --bootstrap-server localhost:9092 --topic users --property parse.key=true --property key.separator=:
-docker exec -it 1c01e14f0936 kafka-console-producer --bootstrap-server localhost:9092 --topic post
+docker exec -it 30eb66da2f4e kafka-console-producer --bootstrap-server localhost:9092 --topic pulse-event --property parse.key=true --property key.separator=:
+docker exec -it 30eb66da2f4e kafka-console-producer --bootstrap-server localhost:9092 --topic body-temp-event --property parse.key=true --property key.separator=:
 
 
 bodyTemperatue
-{ "timeStamp" : "2024-03-30T20:43:54.434138273Z", "temperature" : 101.0, "unit" : "F"}
+1:{ "timestamp" : "2024-03-30T20:43:54.434138273Z", "temperature" : 101.0, "unit" : "F"}
+2:{ "timestamp" : "2024-03-31T11:20:04.524513162Z", "temperature" : 100.0, "unit" : "F"}
 
 timestamp
-{"timeStamp" : "2024-03-30T20:46:56.778417716Z"}
+1:{"timestamp" : "2024-03-30T20:46:56.778417716Z"}
+2:{"timestamp" : "2024-03-31T11:19:42.917829113Z"}
