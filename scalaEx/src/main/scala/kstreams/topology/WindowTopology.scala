@@ -2,7 +2,7 @@ package kstreams.topology
 
 import kstreams.serdes.CustomSerdes
 import model.{BodyTemperature, Pulse}
-import org.apache.kafka.streams.Topology
+import org.apache.kafka.streams.{KeyValue, Topology}
 import org.apache.kafka.streams.kstream.Suppressed.BufferConfig
 import org.apache.kafka.streams.kstream.{Printed, Suppressed, TimeWindows, Windowed}
 import org.apache.kafka.streams.scala.StreamsBuilder
@@ -26,6 +26,11 @@ class WindowTopology(customSerdes: CustomSerdes) {
       .windowedBy(TimeWindows.ofSizeAndGrace(Duration.ofSeconds(5), Duration.ofSeconds(2)))
       .count()(Materialized.as("pulse-count")(Serdes.stringSerde, Serdes.longSerde))
       .suppress(Suppressed.untilWindowCloses(BufferConfig.unbounded().shutDownWhenFull()))
+
+    val highBodyTemperature: KStream[String, BodyTemperature] = bodyTemperature.filter((_, value)=> value.temperature > 100.4)
+    val highPulse: KStream[String, Long] = pulseCount.toStream.filter((key, value) => value >= 100)
+      .map((windowedKey, value) => (windowedKey.key(), value))
+
 
     pulseCount
       .toStream
