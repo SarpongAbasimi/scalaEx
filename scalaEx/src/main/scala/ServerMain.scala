@@ -1,5 +1,3 @@
-package utils
-
 import cats.effect.{IO, IOApp}
 import server.Server
 
