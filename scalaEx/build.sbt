@@ -23,6 +23,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "scalaEx",
     libraryDependencies ++= Seq(
+      "org.http4s" %% "http4s-prometheus-metrics" % "0.24.3",
       "org.apache.kafka" %% "kafka-streams-scala" % "3.6.1",
       "ch.qos.logback" % "logback-classic" % "1.5.1",
       "io.javalin" % "javalin" % "6.1.3",
