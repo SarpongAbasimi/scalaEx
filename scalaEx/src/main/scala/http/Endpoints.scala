@@ -8,6 +8,8 @@ object Endpoints {
     HttpRoutes.of[IO] {
       case GET -> Root / "hello" =>
         Ok("Hello 😊")
+      case GET -> Root / "greet" =>
+        Ok("Morning")
     }
   }
 }
