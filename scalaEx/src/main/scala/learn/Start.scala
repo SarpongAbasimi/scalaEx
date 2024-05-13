@@ -15,6 +15,9 @@ object Start {
   def userResource(input: String): IO[Unit] = mrResource(input).use(res => {
     IO.println(s"The resource is $res")
   })
+
+  def theMap[A, B](input: A)(f: A => B): B =
+    f(input)
 }
 
 
