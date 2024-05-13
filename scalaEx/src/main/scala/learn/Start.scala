@@ -5,11 +5,11 @@ import cats.effect.kernel.Resource
 
 object Start {
   def addition(a: Int, b:Int) : IO[Int]= {
-    IO.pure(a+ b)
+    IO.pure(a + b)
   }
 
-  def mrResource(path: String): Resource[IO, Int] =
-    effect.Resource.make[IO, Int](IO.pure(1))(res => IO.unit)
+  def mrResource(path: String): Resource[IO, String] =
+    effect.Resource.make[IO, String](IO.pure(path))(_ => IO.unit)
 
 
   def userResource(input: String): IO[Unit] = mrResource(input).use(res => {
