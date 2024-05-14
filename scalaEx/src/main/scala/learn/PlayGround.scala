@@ -44,7 +44,7 @@ def myFactorialFor(value: Int): Int = {
 //    def myListMap[A, B](input: MyList[A])(f: A => B): MyList[B] = {
 //      input match {
 //        case EmptyList => EmptyList
-//        case NonEmptyList(head: A, tail: MyList[A]) => myListMap(tail)(input => f(input))
+//        case NonEmptyList(head: A, tail: MyList[A]) => ???
 //      }
 //    }
 //  }
