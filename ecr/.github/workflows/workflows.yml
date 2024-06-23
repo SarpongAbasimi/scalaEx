@@ -2,11 +2,11 @@ name: HelloWorldService
 on:
   - push:
       branches:
-        - master
+        - main
 
   - pull_request:
       branches:
-        - master
+        - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,7 +17,7 @@ jobs:
       with:
         java-version: adopt@1.11
     - name: Run Tests
-      reun: sbt test
+      run: sbt test
 
 
 
