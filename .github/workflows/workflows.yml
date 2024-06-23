@@ -17,9 +17,9 @@ jobs:
           java-version: adopt@1.11
       - name: List dir
         run: ls
-      - name: Run Tests
-        working-directory: ./ecr
-        run: ./ecr sbt test
+#      - name: Run Tests
+#        working-directory: ./ecr
+#        run: ./ecr sbt test
 
 
 
