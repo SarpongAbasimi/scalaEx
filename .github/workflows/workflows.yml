@@ -15,10 +15,9 @@ jobs:
       - uses: olafurpg/setup-scala@v11
         with:
           java-version: adopt@1.11
-      - name: List dir
+      - name: Run Tests
+        working-directory: ./ecr
         run: ls
-#      - name: Run Tests
-#        working-directory: ./ecr
 #        run: ./ecr sbt test
 
 
