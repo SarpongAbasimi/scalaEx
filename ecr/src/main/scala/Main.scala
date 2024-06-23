@@ -5,7 +5,7 @@ import service.HelloWorldService
 
 object Main  extends IOApp.Simple {
   override def run: IO[Unit] = {
-    val name = Name("mao")
+    val name = Name("Ben")
 
     val helloWorldService: HelloWorld[IO] = new HelloWorldService[IO]
 
