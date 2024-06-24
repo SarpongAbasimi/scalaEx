@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'release' }}
 
-    needs: Build
+    needs: build
 
     steps:
       - name: Checkout repo
