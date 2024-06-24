@@ -1,5 +1,6 @@
 name: HelloWorldService
 on:
+  workflow_dispatch:
   push:
     branches: [main]
 
@@ -13,22 +14,18 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - uses: olafurpg/setup-scala@v11
         with:
           java-version: adopt@1.11
       - name: Run Tests
-        working-directory: ./ecr
         run: sbt test
 
   Create-Docker-Image:
-    runs-on: ubuntu-latest
     if: ${{ github.event_name == 'release' }}
-
     needs: build
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -53,6 +50,3 @@ jobs:
           sbt assembly
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-
-
-
