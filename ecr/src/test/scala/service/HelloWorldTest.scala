@@ -10,6 +10,6 @@ object HelloWorldTest extends SimpleIOSuite{
   test(s"that sayHello when given a name says Hello name"){
 
     helloWorldService.sayHello(createName("Goku"))
-      .map(result =>  expect(result == "Goku"))
+      .map(result =>  expect(result == "Hello Goku"))
   }
 }
