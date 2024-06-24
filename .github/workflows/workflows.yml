@@ -20,12 +20,15 @@ jobs:
         with:
           java-version: adopt@1.11
       - name: Run Tests
+        working-directory: ./ecr
         run: sbt test
 
   Create-Docker-Image:
-    if: ${{ github.event_name == 'release' }}
-    needs: build
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'release' }}
+
+    needs: build
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
